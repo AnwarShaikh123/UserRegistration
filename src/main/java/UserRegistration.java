@@ -4,15 +4,16 @@ import java.util.regex.Pattern;
 public class UserRegistration {
     public void validateName() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Email Id ");
-        String emailID=sc.nextLine();
-        String regex=  "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        System.out.println("Enter Contact number: ");
+        String Contact=sc.nextLine();
+        String regex=  "^[0-9]{2} [0-9]{10}$";
         Pattern p=Pattern.compile(regex);
-        Matcher m=p.matcher(emailID);
+        Matcher m=p.matcher(Contact);
         boolean b = m.matches();
         System.out.println(b);
 
     }
+
 
     public static void main(String[] args) {
         UserRegistration ur=new UserRegistration();
