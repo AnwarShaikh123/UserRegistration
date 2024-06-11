@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 public class UserRegistration {
     public void validateName() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Contact number: ");
-        String Contact=sc.nextLine();
-        String regex=  "^[0-9]{2} [0-9]{10}$";
+        System.out.println("Enter password : ");
+        String password=sc.nextLine();
+        String regex=  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
         Pattern p=Pattern.compile(regex);
-        Matcher m=p.matcher(Contact);
+        Matcher m=p.matcher(password);
         boolean b = m.matches();
         System.out.println(b);
 
