@@ -2,79 +2,40 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class UserRegistration {
-    public static void firstName(String firstname){
-        Pattern pattern=Pattern.compile("[A-Z][a-z]{3,}");
-        Matcher match= pattern.matcher(firstname);
-        boolean ismatch= match.matches();
-        if(ismatch){
-            System.out.println("Valid input");
-        }else {
-            System.out.println("Inavaid input");
-        }
+
+    public static boolean checkMail(String mail) {
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mail);
+        return matcher.matches();
     }
 
-    public static void lastName(String lastname){
-        Pattern pattern=Pattern.compile("[A-Z][a-z]{3,}");
-        Matcher match= pattern.matcher(lastname);
-        boolean ismatch= match.matches();
-        if(ismatch){
-            System.out.println("Valid input");
-        }else {
-            System.out.println("Inavaid input");
-        }
-    }
+    public static void checkEmailList() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of email addresses:");
+        int numEmails = sc.nextInt();
+        sc.nextLine(); // Consume newline left-over
 
-    public static void emailId(String emailid){
-        Pattern pattern=Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-        Matcher match= pattern.matcher(emailid);
-        boolean ismatch= match.matches();
-        if(ismatch){
-            System.out.println("Valid input");
-        }else {
-            System.out.println("Inavaid input");
-        }
-    }
+        String[] emails = new String[numEmails];
 
-    public static void phoneNo(String phoneno){
-        Pattern pattern=Pattern.compile("^[0-9]{2} [0-9]{10}$");
-        Matcher match= pattern.matcher(phoneno);
-        boolean ismatch= match.matches();
-        if(ismatch){
-            System.out.println("Valid input");
-        }else {
-            System.out.println("Invaid input");
+        for (int i = 0; i < numEmails; i++) {
+            System.out.println("Enter email address " + (i + 1) + ":");
+            emails[i] = sc.nextLine();
         }
-    }
 
-    public static void Password(String password){
-        Pattern pattern=Pattern.compile("^(?=.*[A-Z]{1,})(?=.*[0-9]{1,}).*[a-z](?=.*[!@#$%&]{1})(.{7,})$");
-        Matcher match= pattern.matcher(password);
-        boolean ismatch= match.matches();
-        if(ismatch){
-            System.out.println("Valid input");
-        }else {
-            System.out.println("Invaid input");
+        System.out.println("\nVerifying Email List\n");
+
+        for (String email : emails) {
+            if (checkMail(email)) {
+                System.out.println(email + " is a valid email");
+            } else {
+                System.out.println(email + " is NOT a valid email");
+            }
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter the first name: ");
-        String firstname= sc.nextLine();
-        firstName(firstname);
-        System.out.print("Enter the Last name: ");
-        String lastname=sc.nextLine();
-        lastName(lastname);
-        System.out.print("Enter the Email ID : ");
-        String emailid= sc.nextLine();
-        emailId(emailid);
-        System.out.print("Enter the Phone no : ");
-        String phoneno= sc.nextLine();
-        phoneNo(phoneno);
-        System.out.print("Enter the Password : ");
-        String password= sc.nextLine();
-        Password(password);
+        checkEmailList();
     }
 }
