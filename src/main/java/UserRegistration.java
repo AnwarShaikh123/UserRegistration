@@ -1,41 +1,87 @@
+import java.util.regex.*;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class UserRegistration {
-
-    public static boolean checkMail(String mail) {
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(mail);
-        return matcher.matches();
-    }
-
-    public static void checkEmailList() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of email addresses:");
-        int numEmails = sc.nextInt();
-        sc.nextLine(); // Consume newline left-over
-
-        String[] emails = new String[numEmails];
-
-        for (int i = 0; i < numEmails; i++) {
-            System.out.println("Enter email address " + (i + 1) + ":");
-            emails[i] = sc.nextLine();
+    public static String FirstName(String name){
+        Pattern pattern = Pattern.compile("[A-Z][a-z]{3,}");
+        Matcher matcher = pattern.matcher(name);
+        boolean ismatch= matcher.matches();
+        if(ismatch){
+            System.out.println("valid");
+            return "Valid";
         }
-
-        System.out.println("\nVerifying Email List\n");
-
-        for (String email : emails) {
-            if (checkMail(email)) {
-                System.out.println(email + " is a valid email");
-            } else {
-                System.out.println(email + " is NOT a valid email");
-            }
+        else{
+            System.out.println("Invalid");
+            return "Invalid";
         }
     }
+    public static String LastName(String name){
+        Pattern pattern = Pattern.compile("[A-Z][a-z]{3,}");
+        Matcher matcher = pattern.matcher(name);
+        boolean ismatch= matcher.matches();
+        if(ismatch){
+            System.out.println("Valid");
+            return "Valid";
+        }
+        else{
+            System.out.println("Invalid");
+            return "Invalid";
+        }
+    }
+    public static String emailId(String name ){
+        Pattern pattern=Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher match= pattern.matcher(name);
+        boolean ismatch= match.matches();
+        if(ismatch){
+            return "Valid";
+        }else {
+            return "Invalid";
+        }
 
+    }
+    public static String phNumber(String name ){
+        Pattern pattern=Pattern.compile("^\\+[0-9]{0,2}\\s[1-9][0-9]{9}$");
+        Matcher match= pattern.matcher(name);
+        boolean ismatch= match.matches();
+        if(ismatch){
+            System.out.println("valid");
+            return "Valid";
+
+        }else {
+            System.out.println("Invalid");
+            return "Invalid";
+        }
+    }
+    public static String Password(String text) {
+        Pattern pattern = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%&])[A-Za-z0-9!@#$%&]{8,}$");
+        Matcher match = pattern.matcher(text);
+        boolean ismatch = match.matches();
+        if (ismatch) {
+            System.out.println("Valid");
+            return "Valid";
+        } else {
+            System.out.println("Invalid");
+            return "Invalid";
+        }
+    }
     public static void main(String[] args) {
-        checkEmailList();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter First Name");
+        String name =sc.nextLine();
+        System.out.println("Enter Last Name");
+        String lastname =sc.nextLine();
+        for (int i = 0; i < 4; i++) {
+            System.out.print("Enter the Email ID: ");
+            String email = sc.nextLine();
+            emailId(email);
+        }
+        FirstName(name);
+        LastName(lastname);
+
+        System.out.println("Enter Number: ");
+        String number= sc.nextLine();
+        phNumber(number);
+        System.out.println("Enter Password");
+        String password=sc.nextLine();
+        Password(password);
     }
 }
